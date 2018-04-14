@@ -28,21 +28,9 @@ public class ChangeBillPopup {
 
         Label billName = new Label();
         TextField billNameEntry = Utils.createEntryField(billName, "Bills", 16, billItem.getName());
-//
-//        Label billName = new Label("Bill:");
-//        billName.setFont(new Font(16));
-//        TextField billNameEntry = new TextField();
-//        billNameEntry.setFont(new Font(16));
-//        billNameEntry.setText(billItem.getName());
 
         Label billPaymentLabel = new Label();
         TextField billPaymentField = Utils.createEntryField(billPaymentLabel, "Monthly Payment ($)", 16, billItem.getAmountPerMonth().toString());
-
-//        Label billPaymentLabel = new Label("Monthly Payment ($):");
-//        billPaymentLabel.setFont(new Font(16));
-//        TextField billPaymentField = new TextField();
-//        billPaymentField.setText(billItem.getAmountPerMonth().toString());
-//        billPaymentField.setFont(new Font(16));
 
         Label totalBillAmountLabel = new Label("Amount Remaining:");
         totalBillAmountLabel.setFont(new Font(16));

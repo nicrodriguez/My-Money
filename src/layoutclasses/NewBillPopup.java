@@ -2,6 +2,7 @@ package layoutclasses;
 
 import classes.BillItem;
 import classes.BillItems;
+import classes.Utils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,6 +22,9 @@ import java.text.DecimalFormat;
 
 public class NewBillPopup {
 
+
+
+
         public static void display()
         {
             Stage popupwindow=new Stage();
@@ -28,29 +32,17 @@ public class NewBillPopup {
             popupwindow.initModality(Modality.APPLICATION_MODAL);
             popupwindow.setTitle("Add Bill");
 
-            Label billNameLabel = new Label("Bill Name:");
-            billNameLabel.setFont(new Font(16));
-            TextField billNameField = new TextField();
-            billNameField.setFont(new Font(16));
-            billNameField.setPromptText("name");
+            Label billNameLabel = new Label();
+            TextField billNameField = Utils.createEntryField(billNameLabel, "Bill Name: ", 16, "name");
 
-            Label billPaymentLabel = new Label("Monthly Payment ($):");
-            billPaymentLabel.setFont(new Font(16));
-            TextField billPaymentField = new TextField();
-            billPaymentField.setPromptText("payment");
-            billPaymentField.setFont(new Font(16));
+            Label billPaymentLabel = new Label();
+            TextField billPaymentField = Utils.createEntryField(billPaymentLabel, "Monthly Payment ($)", 16, "payment");
 
-            Label totalBillAmountLabel = new Label("Amount Remaining:");
-            totalBillAmountLabel.setFont(new Font(16));
-            TextField totalBillField = new TextField();
-            totalBillField.setFont(new Font(16));
-            totalBillField.setPromptText("amount");
+            Label totalBillAmountLabel = new Label();
+            TextField totalBillField = Utils.createEntryField(totalBillAmountLabel, "Amount Remaining:", 16, "amount");
 
-            Label interestRateLabel = new Label("Interest Rate:");
-            interestRateLabel.setFont(new Font(16));
-            TextField interestField = new TextField();
-            interestField.setFont(new Font(16));
-            interestField.setPromptText("interest");
+            Label interestRateLabel = new Label();
+            TextField interestField = Utils.createEntryField(interestRateLabel, "Interest Rate:", 16, "interest");
 
             DecimalFormat df = new DecimalFormat("#.##");
             Button addButton = new Button("Add");

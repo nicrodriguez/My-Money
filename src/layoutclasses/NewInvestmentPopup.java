@@ -2,6 +2,7 @@ package layoutclasses;
 
 import classes.InvestmentItem;
 import classes.InvestmentItems;
+import classes.Utils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,30 +24,17 @@ public class NewInvestmentPopup {
         Stage popupwindow = new Stage();
         popupwindow.setTitle("Add Investment");
 
-        Label investmentNameLabel = new Label("Investment Name:");
-        investmentNameLabel.setFont(new Font(16));
-        TextField investmentNameField = new TextField();
-        investmentNameField.setFont(new Font(16));
-        investmentNameField.setPromptText("name");
+        Label investmentNameLabel = new Label();
+        TextField investmentNameField = Utils.createEntryField(investmentNameLabel, "Investment Name:", 16, "name");
 
-        Label investmentAllocationLabel = new Label("Monthly Allocation:");
-        investmentAllocationLabel.setFont(new Font(16));
-        TextField investmentAllocationField = new TextField();
-        investmentAllocationField.setFont(new Font(16));
-        investmentAllocationField.setPromptText("allocation");
+        Label investmentAllocationLabel = new Label();
+        TextField investmentAllocationField = Utils.createEntryField(investmentAllocationLabel, "Monthly Allocation:", 16, "allocation");
 
-        Label totalInvestedLabel = new Label("Total Invested:");
-        totalInvestedLabel.setFont(new Font(16));
-        TextField totalInvestedField = new TextField();
-        totalInvestedField.setFont(new Font(16));
-        totalInvestedField.setPromptText("total");
+        Label totalInvestedLabel = new Label();
+        TextField totalInvestedField = Utils.createEntryField(totalInvestedLabel, "Total Invested", 16, "total");
 
-        Label totalNetInvestedLabel = new Label("Total Net Investment Worth:");
-        totalNetInvestedLabel.setFont(new Font(16));
-        TextField totalNetInvestedField = new TextField();
-        totalNetInvestedField.setFont(new Font(16));
-        totalNetInvestedField.setPromptText("total net");
-
+        Label totalNetInvestedLabel = new Label();
+        TextField totalNetInvestedField = Utils.createEntryField(totalNetInvestedLabel,"Total Net Investment Worth", 16, "total net");
 
         DecimalFormat df = new DecimalFormat("#.##");
         Button addButton = new Button("Add");
