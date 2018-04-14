@@ -1,0 +1,8 @@
+Rent,0.0,0.0,0.0
+Food,200.0,0.0,0.0
+Car Insurance,0.0,0.0,0.0
+Grammarly,7.0,0.0,0.0
+Amazon Prime,4.42,0.0,0.0
+Utilities,0.0,0.0,0.0
+Gas,0.0,0.0,0.0
+Misc,100.0,0.0,0.0
