@@ -20,12 +20,10 @@ public class MainController {
     private TextField wageField;
     @FXML
     private TextField hoursField;
-
     @FXML
     private Label label401;
     @FXML
     private Slider slider401;
-
     @FXML
     private Label labelTax;
     @FXML
@@ -69,16 +67,12 @@ public class MainController {
     @FXML
     private Button deleteInvButton;
 
-
     //Calculated Pay
     private List<BankItem> bankItems;
     @FXML
     private Label checkingAccountLabel;
-//    @FXML
-//    private Button changingCheckingAmountButton;
     @FXML
     private Label savingsAccountLabel;
-
 
     @FXML
     private Label biWeeklyPC;
@@ -97,6 +91,7 @@ public class MainController {
 
     public void initialize() throws URISyntaxException {
         df = new DecimalFormat("#.##");
+
 
         // Load In Data
         BankItems.getInstance().loadBankItems();
@@ -119,6 +114,8 @@ public class MainController {
 
         // calculate paychecks
         onSetValuesPressed();
+
+
 
     }
 
@@ -163,7 +160,7 @@ public class MainController {
                 selectedNet.setText("Net Sum: $" + item.getNetSum());
             }
         }));
-        intializeInvestmentSummary();
+        initializeInvestmentSummary();
         setInvestmentButtonStyles(addInvButton);
         setInvestmentButtonStyles(changeInvButton);
         setInvestmentButtonStyles(deleteInvButton);
@@ -284,6 +281,7 @@ public class MainController {
                 BillItems.getInstance().deleteBillItem(selected);
                 billListView.getItems().clear();
                 billListView.getItems().setAll(BillItems.getInstance().getBillItems());
+
             }
         }
     }
@@ -292,6 +290,7 @@ public class MainController {
         NewInvestmentPopup.display();
         investmentListView.getItems().clear();
         investmentListView.getItems().addAll(InvestmentItems.getInstance().getInvestmentItems());
+
     }
     @FXML
     public void onChangeInvItemPressed(){
@@ -299,6 +298,7 @@ public class MainController {
                 investmentListView.getSelectionModel().getSelectedItem());
         investmentListView.getItems().clear();
         investmentListView.getItems().addAll(InvestmentItems.getInstance().getInvestmentItems());
+
 
     }
     @FXML
@@ -315,6 +315,7 @@ public class MainController {
                 InvestmentItems.getInstance().deleteItem(selected);
                 investmentListView.getItems().clear();
                 investmentListView.getItems().setAll(InvestmentItems.getInstance().getInvestmentItems());
+
             }
         }
     }
@@ -328,6 +329,8 @@ public class MainController {
         netWorthLabel.setText("Net Worth: $" + netWorth);
         List<String> paycheckData  = new ArrayList<>();
         updatePaycheckFile(paycheckData);
+
+
     }
     @FXML
     public void onChangeCheckingsPressed() {
@@ -338,9 +341,6 @@ public class MainController {
         checkingAccountLabel.setText("Checking Account: $" + bankItems.get(0).getBalance());
         savingsAccountLabel.setText("Savings Account: $" + bankItems.get(1).getBalance());
 
-//        bankItems.clear();
-//        bankItems = BankItems.getInstance().getBankItems();
-//        System.out.println(bankItems.get(0).getBalance());
     }
 
     private void initializeBillSummary(){
@@ -363,7 +363,7 @@ public class MainController {
 
         }
     }
-    private void intializeInvestmentSummary(){
+    private void initializeInvestmentSummary(){
 //        InvestmentItem item = investmentListView.getSelectionModel().getSelectedItem();
         selectedInvestment.setText("Investment: "+investmentListView.getSelectionModel().getSelectedItem().getName());
         selectedSum.setText("Sum: $" + investmentListView.getSelectionModel().getSelectedItem().getTotalAmount());

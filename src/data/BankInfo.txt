@@ -1,2 +1,2 @@
-Checking Account,461.23
-Savings Account,10.0
+Checking Account,266.5
+Savings Account,0.0

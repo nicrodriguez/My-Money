@@ -21,10 +21,6 @@ import java.net.URISyntaxException;
 import java.text.DecimalFormat;
 
 public class NewBillPopup {
-
-
-
-
         public static void display()
         {
             Stage popupwindow=new Stage();
@@ -89,7 +85,6 @@ public class NewBillPopup {
             popupwindow.showAndWait();
 
         }
-
 
 }
 

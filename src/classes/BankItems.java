@@ -37,7 +37,6 @@ public class BankItems {
         updateBankFile(data);
     }
 
-
     //Updates Bank Information
     private void updateBankFile(List<String> data){
         for(BankItem bankItem : bankItems){

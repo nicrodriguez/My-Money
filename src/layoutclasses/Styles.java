@@ -11,7 +11,7 @@ public class Styles {
     public static String InvestmentButtonPressed(){return "-fx-background-color: #003345; -fx-border-color: #003345";}
     public static String UpdateValueButtonStyle(){return "-fx-border-color: #8c8c8c; -fx-background-color: #ebebeb"; }
     public static String UpdateValueButtonPressed(){return "-fx-border-color: #8c8c8c; -fx-background-color: #8c8c8c"; }
-
+    public static String SettingsChanged(){return "-fx-border-color: #8c8c8c; -fx-background-color: #f6f6e8"; }
     //Label Styles
     public static void SectionTitle(Label label){
         label.setUnderline(true);

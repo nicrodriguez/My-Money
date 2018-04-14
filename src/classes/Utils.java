@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
+
+    // File Handling
     public static List<String> readData(String filePath) throws URISyntaxException {
 
         try {
@@ -54,6 +56,8 @@ public class Utils {
 
 
     }
+
+    //Layouts
     public  static TextField createEntryField(Label label, String text, int fontSize, String prompt){
         label.setText(text);
         label.setFont(new Font(fontSize));
