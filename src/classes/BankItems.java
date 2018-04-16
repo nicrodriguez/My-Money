@@ -47,4 +47,13 @@ public class BankItems {
         Utils.writeData(System.getProperty("user.dir") + "/src/data/BankInfo.txt", data);
     }
 
+    public Double getAccountsSum(){
+        Double sum = 0.0;
+        for(BankItem bankItem : bankItems){
+            sum += bankItem.getBalance();
+        }
+        return sum;
+    }
+
+
 }

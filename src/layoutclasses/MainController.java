@@ -2,6 +2,7 @@ package layoutclasses;
 
 import classes.*;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 
@@ -87,7 +88,13 @@ public class MainController {
     @FXML
     private Button setValuesButton;
 
+    /*********** Center Pane ***********/
+    //Wealth summary
+    @FXML
+    private PieChart  summaryPieChart;
+
     private DecimalFormat df;
+    private Double netWorth;
 
     public void initialize() throws URISyntaxException {
         df = new DecimalFormat("#.##");
@@ -114,6 +121,8 @@ public class MainController {
 
         // calculate paychecks
         onSetValuesPressed();
+
+
 
 
 
@@ -242,7 +251,10 @@ public class MainController {
 
     private Double determinePayCheck(Double rate401, Double rateTax) {
 
-        MoneyCalculations MC = new MoneyCalculations(Double.parseDouble(wageField.getText()), Double.parseDouble(hoursField.getText()), bankItems.get(0).getBalance(), bankItems.get(1).getBalance());
+        MoneyCalculations MC = new MoneyCalculations(Double.parseDouble(wageField.getText()),
+                Double.parseDouble(hoursField.getText()),
+                bankItems.get(0).getBalance(),
+                bankItems.get(1).getBalance());
         MC.setRate401(rate401);
         MC.setTaxPer(rateTax);
         MC.calculateNetPayCheck();
@@ -323,12 +335,15 @@ public class MainController {
     public void onSetValuesPressed() {
         Double rate401 = slider401.getValue()/100.0;
         Double rateTax = sliderTax.getValue()/100.0;
-        Double netWorth = determinePayCheck(rate401, rateTax);
+        netWorth = determinePayCheck(rate401, rateTax);
         checkingAccountLabel.setText("Checking Account: $" + bankItems.get(0).getBalance());
         savingsAccountLabel.setText("Savings Account: $" + bankItems.get(1).getBalance());
         netWorthLabel.setText("Net Worth: $" + netWorth);
         List<String> paycheckData  = new ArrayList<>();
         updatePaycheckFile(paycheckData);
+
+        // load wealth chart
+        loadPaycheckChartData();
 
 
     }
@@ -378,7 +393,53 @@ public class MainController {
         Utils.writeData(System.getProperty("user.dir") + "/src/data/PaycheckInfo.txt", data);
     }
 
+    private void loadWealthChartData(){
+        Double totalInvestments = InvestmentItems.getInstance().getNetInvestments();
+        Double totalBankSum = BankItems.getInstance().getAccountsSum();
 
+        Double percentInvestments = Double.valueOf(df.format(totalInvestments/netWorth*100));
+        Double percentBankItems = Double.valueOf(df.format(totalBankSum/netWorth*100));
+
+        summaryPieChart.getData().clear();
+        summaryPieChart.getData().add(new PieChart.Data("Investments: " + percentInvestments +"%", percentInvestments));
+        summaryPieChart.getData().add(new PieChart.Data("Bank Accounts: " + percentBankItems + "%", percentBankItems));
+    }
+
+    private void loadPaycheckChartData(){
+        Double rate401 = slider401.getValue()/100.0;
+        Double rateTax = sliderTax.getValue()/100.0;
+
+        List<InvestmentItem> investmentItems = InvestmentItems.getInstance().getInvestmentItems();
+        List<BillItem> billItems = BillItems.getInstance().getBillItems();
+        MoneyCalculations MC = new MoneyCalculations(Double.parseDouble(wageField.getText()), Double.parseDouble(hoursField.getText()), bankItems.get(0).getBalance(), bankItems.get(1).getBalance());
+        MC.setRate401(rate401);
+        MC.setTaxPer(rateTax);
+        MC.calculateNetPayCheck();
+
+        Double totalBillCost = 0.0;
+        for(BillItem billItem : BillItems.getInstance().getBillItems()){
+            totalBillCost += billItem.getAmountPerMonth();
+        }
+
+        Double investmentCost = 0.0;
+        for(InvestmentItem investmentItem : InvestmentItems.getInstance().getInvestmentItems()){
+            investmentCost += investmentItem.getAmountPerMonth();
+        }
+
+        Double percentBills = Double.valueOf(df.format(totalBillCost/MC.getMonthlyPayCheck()*100));
+        Double percentInvestment = Double.valueOf(df.format(investmentCost/MC.getMonthlyPayCheck()*100));
+        Double percent401K = Double.valueOf(df.format(rate401*100));
+        Double percentTax = Double.valueOf(df.format(rateTax*100));
+        Double remaining = Double.valueOf(df.format(100 - percentBills - percentInvestment - percent401K - percentTax));
+
+        summaryPieChart.getData().clear();
+        summaryPieChart.setTitle("Paycheck Summary");
+        summaryPieChart.getData().add(new PieChart.Data("Bills: " + percentBills +"%", percentBills));
+        summaryPieChart.getData().add(new PieChart.Data("Investments: " + percentInvestment +"%", percentInvestment));
+        summaryPieChart.getData().add(new PieChart.Data("Tax: " +percentTax+"%", percentTax));
+        summaryPieChart.getData().add(new PieChart.Data("401K Contrib: " + percent401K + "%", percent401K));
+        summaryPieChart.getData().add(new PieChart.Data("Remaining Paycheck: "+ remaining + "%", remaining));
+    }
 
 
 
