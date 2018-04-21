@@ -27,10 +27,10 @@ public class ChangeBillPopup {
         changeBill.setTitle("Change Bill");
 
         Label billName = new Label();
-        TextField billNameEntry = Utils.createEntryField(billName, "Bills", 16, billItem.getName());
+        TextField billNameEntry = Utils.createChangeEntryField(billName, "Bills", 16, billItem.getName());
 
         Label billPaymentLabel = new Label();
-        TextField billPaymentField = Utils.createEntryField(billPaymentLabel, "Monthly Payment ($)", 16, billItem.getAmountPerMonth().toString());
+        TextField billPaymentField = Utils.createChangeEntryField(billPaymentLabel, "Monthly Payment ($)", 16, billItem.getAmountPerMonth().toString());
 
         Label totalBillAmountLabel = new Label("Amount Remaining:");
         totalBillAmountLabel.setFont(new Font(16));

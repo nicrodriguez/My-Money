@@ -36,16 +36,16 @@ public class ChangeInvestmentPopup {
         changeInv.setTitle("Change Bill");
 
         Label investmentName = new Label();
-        TextField investmentNameEntry = Utils.createEntryField(investmentName, "InvestmentAcount", 16, investmentItem.getName());
+        TextField investmentNameEntry = Utils.createChangeEntryField(investmentName, "InvestmentAcount", 16, investmentItem.getName());
 
         Label monthlyAllocationLabel = new Label();
-        TextField allocationField = Utils.createEntryField(monthlyAllocationLabel, "Monthly Allocation ($):", 16, investmentItem.getAmountPerMonth().toString());
+        TextField allocationField = Utils.createChangeEntryField(monthlyAllocationLabel, "Monthly Allocation ($):", 16, investmentItem.getAmountPerMonth().toString());
 
         Label investmentSumLabel = new Label();
-        TextField totalInvField = Utils.createEntryField(investmentSumLabel, "Total Invested", 16, investmentItem.getTotalAmount().toString());
+        TextField totalInvField = Utils.createChangeEntryField(investmentSumLabel, "Total Invested", 16, investmentItem.getTotalAmount().toString());
 
         Label netSumLabel = new Label();
-        TextField netSumField = Utils.createEntryField(netSumLabel, "Net Sum: ", 16, investmentItem.getNetSum().toString());
+        TextField netSumField = Utils.createChangeEntryField(netSumLabel, "Net Sum: ", 16, investmentItem.getNetSum().toString());
 
 
         DecimalFormat df = new DecimalFormat("#.##");

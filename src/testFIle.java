@@ -1,19 +1,49 @@
+import classes.TimeSpan;
+import classes.Utils;
+
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class testFIle {
-    public static void main(String[] args) throws URISyntaxException {
-        List<String> info = readData("data/InvestmentInfo.txt");
-        assert info != null;
-        for(String data : info){
-            System.out.println(data);
+    public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+        TimeSpan timeSpan = new TimeSpan(21, 4, 2018);
+        List<String> months = timeSpan.getNext12Months();
+        for(String month : months){
+            System.out.println(month);
         }
-        writeData("data/InvestmentInfo.txt", info);
 
     }
 
+    private static void hack() throws IOException, URISyntaxException, InterruptedException {
+        System.out.println("Do you want to hack the FBI? (Y/N)");
+        BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
+        String inputLine = bufferReader.readLine();
+        switch (inputLine) {
+            case "Y": case "y":
+                List<String> hackingData = Utils.readData("/data/hacked.rtf");
+                assert hackingData != null;
+                for(String line : hackingData){
+                    System.out.println(line);
+                    Thread.sleep(25);
+                }
+
+                System.out.println("FBI = HACKED!!!! ");
+                Thread.sleep(2000);
+                System.out.println("Incoming Message From FBI...");
+                Thread.sleep(2000);
+                System.out.println("DON'T FUCKING MOVE!!");
+                break;
+            case "N": case "n":
+                System.out.println("FBI != HACKED");
+                break;
+            default:
+                System.out.println("I said Y or N you dunce");
+                break;
+        }
+    }
     private static List<String> readData(String filePath) throws URISyntaxException {
 
         try {

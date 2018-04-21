@@ -58,7 +58,16 @@ public class Utils {
     }
 
     //Layouts
-    public  static TextField createEntryField(Label label, String text, int fontSize, String prompt){
+    public static TextField createEntryField(Label label, String text, int fontSize, String prompt){
+        label.setText(text);
+        label.setFont(new Font(fontSize));
+        TextField Entry = new TextField();
+        Entry.setFont(new Font(fontSize));
+        Entry.setPromptText(prompt);
+        return Entry;
+    }
+
+    public static TextField createChangeEntryField(Label label, String text, int fontSize, String prompt) {
         label.setText(text);
         label.setFont(new Font(fontSize));
         TextField Entry = new TextField();

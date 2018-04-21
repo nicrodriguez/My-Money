@@ -1,12 +1,17 @@
-package layoutclasses;
+{rtf1ansiansicpg1252cocoartf1561cocoasubrtf400
+{fonttblf0fswissfcharset0 Helvetica;}
+{colortbl;red255green255blue255;}
+{*expandedcolortbl;;}
+margl1440margr1440vieww10800viewh8400viewkind0
+pardtx720tx1440tx2160tx2880tx3600tx4320tx5040tx5760tx6480tx7200tx7920tx8640pardirnaturalpartightenfactor0
+
+f0fs24 cf0 package layoutclasses;
 
 import classes.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.net.URISyntaxException;
@@ -18,8 +23,6 @@ import java.util.Optional;
 
 public class MainController {
 
-    @FXML
-    private BorderPane mainPane;
     /*********** Right Pane ***********/
     //Paycheck Info Tab
     @FXML
@@ -98,16 +101,11 @@ public class MainController {
     /*********** Center Pane ***********/
     //Wealth summary
     @FXML
-    private VBox pieChartVBox;
-    @FXML
     private PieChart summaryPieChart;
     @FXML
     private Button summaryButton;
     @FXML
     private Button detailsButton;
-
-    //Wealth Projection
-    private LineChart<String, Number> predictionChart;
 
     /*********** Left Pane ***********/
     @FXML
@@ -116,31 +114,22 @@ public class MainController {
     private RadioButton wealthRadio;
     @FXML
     private RadioButton billRadio;
-    @FXML
-    private RadioButton projectionsRadio;
 
     private DecimalFormat df;
     private Double netWorth;
-    private MoneyCalculations MC;
-    private Double rateTax;
-    private Double rate401;
-    private TimeSpan timeSpan;
 
 
 
     public void initialize() throws URISyntaxException {
         df = new DecimalFormat("#.##");
-        Integer month = Calendar.getInstance().get(Calendar.MONTH);
-        Integer day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        Integer year = Calendar.getInstance().get(Calendar.YEAR);
-        timeSpan = new TimeSpan(day, month, year);
+//        yAxis.setLabel("Amount ($)");
+
         // Load In Data
         BankItems.getInstance().loadBankItems();
         bankItems = BankItems.getInstance().getBankItems();
 
         InvestmentItems.getInstance().loadInvestmentItems();
         BillItems.getInstance().loadbillItems();
-
 
         // initializing paycheck info
         initializePaycheckInfo();
@@ -151,20 +140,11 @@ public class MainController {
         // initializing investment info
         initializeInvestmentInfo();
 
-        MC = new MoneyCalculations(Double.parseDouble(wageField.getText()),
-                Double.parseDouble(hoursField.getText()),
-                bankItems.get(0).getBalance(),
-                bankItems.get(1).getBalance());
-        rateTax = sliderTax.getValue()/100;
-        rate401 = slider401.getValue()/100;
-
         // initializing buttons on each tab
         initializeButtons();
 
         // calculate paychecks
         onSetValuesPressed();
-
-
 
     }
 
@@ -247,16 +227,12 @@ public class MainController {
         summaryButton.pressedProperty().addListener((observable, wasPressed, pressed) ->{
             if(pressed && chartToggle.getSelectedToggle() == wealthRadio ){
                 loadWealthChartData();
-            }else if(pressed && chartToggle.getSelectedToggle() == billRadio){
-                loadPaycheckChartData();
             }
         });
         detailsButton.setMaxWidth(Double.MAX_VALUE);
         detailsButton.pressedProperty().addListener(((observable, wasPressed, pressed) -> {
             if(pressed && chartToggle.getSelectedToggle() == wealthRadio){
                 loadDetailedWealthPieChartData();
-            }else if(pressed && chartToggle.getSelectedToggle() == billRadio){
-                loadDetailedPaycheckPiechart();
             }
         }));
 
@@ -273,6 +249,7 @@ public class MainController {
 
 
     }
+
 
     private void setInvestmentButtonStyles(Button InvestmentButton){
         InvestmentButton.pressedProperty().addListener((observable, wasPressed, pressed) -> {
@@ -320,8 +297,13 @@ public class MainController {
                 String.valueOf(Double.valueOf(df.format(sliderTax.getValue()))));
         Utils.writeData(System.getProperty("user.dir") + "/src/data/PaycheckInfo.txt", data);
     }
+
     private Double determinePayCheck(Double rate401, Double rateTax) {
 
+        MoneyCalculations MC = new MoneyCalculations(Double.parseDouble(wageField.getText()),
+                Double.parseDouble(hoursField.getText()),
+                bankItems.get(0).getBalance(),
+                bankItems.get(1).getBalance());
         MC.setRate401(rate401);
         MC.setTaxPer(rateTax);
         MC.calculateNetPayCheck();
@@ -333,6 +315,7 @@ public class MainController {
 
         return MC.getNetWorth();
     }
+
 
     /****** Chart Functions *******/
     private void loadWealthChartData(){
@@ -346,13 +329,10 @@ public class MainController {
         loadWealthPieChartData(percentages, absValues);
     }
     private void loadPaycheckChartData() {
-//        Double rate401 = slider401.getValue() / 100.0;
-//        Double rateTax = sliderTax.getValue() / 100.0;
+        Double rate401 = slider401.getValue() / 100.0;
+        Double rateTax = sliderTax.getValue() / 100.0;
 
-        MC = new MoneyCalculations(Double.parseDouble(wageField.getText()),
-                Double.parseDouble(hoursField.getText()),
-                bankItems.get(0).getBalance(),
-                bankItems.get(1).getBalance());
+        MoneyCalculations MC = new MoneyCalculations(Double.parseDouble(wageField.getText()), Double.parseDouble(hoursField.getText()), bankItems.get(0).getBalance(), bankItems.get(1).getBalance());
         MC.setRate401(rate401);
         MC.setTaxPer(rateTax);
         MC.calculateNetPayCheck();
@@ -376,7 +356,6 @@ public class MainController {
         loadPaycheckPiechart(percentages, absValues);
     }
 
-    // Paycheck chart data
     private void loadPaycheckPiechart(Double[] percentages, Double[] absValues){
         summaryPieChart.getData().clear();
         summaryPieChart.setTitle("Paycheck Summary");
@@ -386,48 +365,30 @@ public class MainController {
         summaryPieChart.getData().add(new PieChart.Data("401K Contrib: $" + absValues[3], percentages[3]));
         summaryPieChart.getData().add(new PieChart.Data("Remaining: $"+ absValues[4], percentages[4]));
     }
-//    private void loadPaycheckPiechart(Double[] percentages){
-//        summaryPieChart.getData().clear();
-//        summaryPieChart.setTitle("Paycheck Summary");
-//        summaryPieChart.getData().add(new PieChart.Data("Bills: " + percentages[0] +"%", percentages[0]));
-//        summaryPieChart.getData().add(new PieChart.Data("Investments: " + percentages[1] +"%", percentages[2]));
-//        summaryPieChart.getData().add(new PieChart.Data("Tax: " +percentages[2]+"%", percentages[2]));
-//        summaryPieChart.getData().add(new PieChart.Data("401K Contrib: " + percentages[3] + "%", percentages[3]));
-//        summaryPieChart.getData().add(new PieChart.Data("Remaining Paycheck: "+ percentages[4] + "%", percentages[4]));
-//
-//    }
-    private void loadDetailedPaycheckPiechart(){
+    private void loadPaycheckPiechart(Double[] percentages){
         summaryPieChart.getData().clear();
-        summaryPieChart.setTitle("Paycheck Details");
-        for(BillItem billItem : BillItems.getInstance().getBillItems()){
-            summaryPieChart.getData().add(new PieChart.Data(billItem.getName() +": $" + Double.valueOf(df.format(billItem.getAmountPerMonth())),
-                    billItem.getAmountPerMonth()/MC.getMonthlyPayCheck()*100));
-        }
-        for(InvestmentItem investmentItem : InvestmentItems.getInstance().getInvestmentItems()){
-            summaryPieChart.getData().add(new PieChart.Data(investmentItem.getName() + ": $" + Double.valueOf(df.format(investmentItem.getAmountPerMonth())),
-                    investmentItem.getAmountPerMonth()/MC.getMonthlyPayCheck()*100));
-        }
-        summaryPieChart.getData().add(new PieChart.Data("Tax: $" + Double.valueOf(df.format(rateTax*(MC.getMonthlyPayCheck() - MC.getMonthlyPayCheck()*rate401)))+"%",
-                rateTax*100));
-        summaryPieChart.getData().add(new PieChart.Data("401K Contrib: $" + Double.valueOf(df.format(rate401*MC.getMonthlyPayCheck())), rate401*100));
-        summaryPieChart.getData().add(new PieChart.Data("Remaining: $" + Double.valueOf(df.format(MC.getMonthlyPayCheckNet())), MC.getMonthlyPayCheckNet()/MC.getMonthlyPayCheck()*100));
-
+        summaryPieChart.setTitle("Paycheck Summary");
+        summaryPieChart.getData().add(new PieChart.Data("Bills: " + percentages[0] +"%", percentages[0]));
+        summaryPieChart.getData().add(new PieChart.Data("Investments: " + percentages[1] +"%", percentages[2]));
+        summaryPieChart.getData().add(new PieChart.Data("Tax: " +percentages[2]+"%", percentages[2]));
+        summaryPieChart.getData().add(new PieChart.Data("401K Contrib: " + percentages[3] + "%", percentages[3]));
+        summaryPieChart.getData().add(new PieChart.Data("Remaining Paycheck: "+ percentages[4] + "%", percentages[4]));
 
     }
 
-    // Wealth chart data
+
     private void loadWealthPieChartData(Double[] percentages, Double[] absValues){
         summaryPieChart.getData().clear();
         summaryPieChart.setTitle("Wealth Summary");
         summaryPieChart.getData().add(new PieChart.Data("Investments: $" + absValues[0], percentages[0]));
         summaryPieChart.getData().add(new PieChart.Data("Bank Accounts: $" + absValues[1], percentages[1]));
     }
-//    private void loadWealthPieChartData(Double[] percentages){
-//        summaryPieChart.getData().clear();
-//        summaryPieChart.setTitle("Wealth Summary");
-//        summaryPieChart.getData().add(new PieChart.Data("Investments: " + percentages[0] +"%", percentages[0]));
-//        summaryPieChart.getData().add(new PieChart.Data("Bank Accounts: " + percentages[1] + "%", percentages[1]));
-//    }
+    private void loadWealthPieChartData(Double[] percentages){
+        summaryPieChart.getData().clear();
+        summaryPieChart.setTitle("Wealth Summary");
+        summaryPieChart.getData().add(new PieChart.Data("Investments: " + percentages[0] +"%", percentages[0]));
+        summaryPieChart.getData().add(new PieChart.Data("Bank Accounts: " + percentages[1] + "%", percentages[1]));
+    }
     private void loadDetailedWealthPieChartData(){
         summaryPieChart.getData().clear();
         summaryPieChart.setTitle("Wealth Details");
@@ -443,113 +404,21 @@ public class MainController {
 
     }
 
-    // Predictions chart data
-    private List<Double> calculateBankPrediction(){
+    private void calculateYearPredictionChart(){
+        Integer month = Calendar.getInstance().get(Calendar.MONTH);
+        Integer day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        Integer year = Calendar.getInstance().get(Calendar.YEAR);
+        TimeSpan timeSpan = new TimeSpan(day, month, year);
+        List<String> months = timeSpan.getMonthsOfYear();
 
-        Double val = BankItems.getInstance().getAccountsSum();
-        List<Double> monthlyVals = new ArrayList<>();
-        monthlyVals.add(val);
-        for(int i = 0; i < 11; i++){
-            val += (MC.getMonthlyPayCheckNet()) ;
-            monthlyVals.add(val);
-        }
 
-        return monthlyVals;
-    }
-    private List<Double> calculateInvestmentPredictions(InvestmentItem investmentItem){
-        Double investmentVal = investmentItem.getNetSum();
-        List<Double> monthlyVals = new ArrayList<>();
-        monthlyVals.add((investmentVal + investmentVal*0.05));
-        for(int i = 0; i < 11; i++){
-            if(investmentItem.getName().equals("401k")){
-                investmentVal += MC.getMonthlyPayCheck()*rate401*2;
-                monthlyVals.add(investmentVal);
-            }else {
-                investmentVal += investmentItem.getAmountPerMonth();
-                monthlyVals.add((investmentVal + investmentVal * 0.05));
-            }
-        }
-        return monthlyVals;
-    }
-    private List<Double> calculateNetWorthPredictions(){
-        Double netWorthVal = netWorth;
-        Double investments = 0.0;
-        List<InvestmentItem> investmentItems = InvestmentItems.getInstance().getInvestmentItems();
-        List<Double> monthlyVals = new ArrayList<>();
-        for(InvestmentItem investmentItem : investmentItems){
-            investments += investmentItem.getAmountPerMonth();
-        }
-        monthlyVals.add(netWorthVal);
-        for(int i = 0; i < 11; i++){
-            netWorthVal += ((investments + investments*0.05) + MC.getMonthlyPayCheckNet() + MC.getMonthlyPayCheck()*rate401*2);
-            monthlyVals.add(netWorthVal);
-        }
-        return monthlyVals;
     }
 
-    private void loadPredChart(){
-        MC = new MoneyCalculations(Double.parseDouble(wageField.getText()),
-                Double.parseDouble(hoursField.getText()),
-                bankItems.get(0).getBalance(),
-                bankItems.get(1).getBalance());
-        MC.setRate401(rate401);
-        MC.setTaxPer(rateTax);
-        MC.calculateNetPayCheck();
-        // Initiating line chart that shows history of the current month
-        CategoryAxis xAxisPred = new CategoryAxis();
-        NumberAxis yAxisPred = new NumberAxis();
-        yAxisPred.setLabel("Bank Balance ($)");
-        predictionChart = new LineChart<>(xAxisPred, yAxisPred);
-        predictionChart.setTitle("Projections");
-        List<String> months = timeSpan.getNext12Months();
-        List<Double> bankAccountBalance = calculateBankPrediction();
-        List<Double> netWorthPred = calculateNetWorthPredictions();
-
-
-
-        XYChart.Series<String, Number> bankSeries = new XYChart.Series<>();
-        bankSeries.setName("Bank Account");
-        XYChart.Series<String, Number> netWorthSeries = new XYChart.Series<>();
-        netWorthSeries.setName("Net Worth");
-
-        List<List<Double>> investments = new ArrayList<>();
-        List<InvestmentItem> investmentItems = InvestmentItems.getInstance().getInvestmentItems();
-
-        List<XYChart.Series<String, Number>> investmentSeries = new ArrayList<>();
-        for(int i = 0; i < investmentItems.size(); i++){
-            investments.add(calculateInvestmentPredictions(investmentItems.get(i)));
-            investmentSeries.add(new XYChart.Series<>());
-            investmentSeries.get(i).setName(investmentItems.get(i).getName());
-            for(int j = 0; j < 12; j++){
-                investmentSeries.get(i).getData().add(new XYChart.Data<>(months.get(j), investments.get(i).get(j)));
-            }
-        }
-
-
-        for(int i = 0; i < 12; i++){
-            bankSeries.getData().add(new XYChart.Data<>(months.get(i), bankAccountBalance.get(i)));
-            netWorthSeries.getData().add(new XYChart.Data<>(months.get(i), netWorthPred.get(i)));
-        }
-        predictionChart.getData().add(bankSeries);
-        predictionChart.getData().add(netWorthSeries);
-        for(XYChart.Series<String, Number> invSeries: investmentSeries){
-            predictionChart.getData().add(invSeries);
-        }
-    }
-
-    //
     private void setChart(){
         if(chartToggle.getSelectedToggle() == wealthRadio){
-            mainPane.setCenter(pieChartVBox);
             loadWealthChartData();
         }else if(chartToggle.getSelectedToggle() == billRadio){
-            mainPane.setCenter(pieChartVBox);
             loadPaycheckChartData();
-        }else if(chartToggle.getSelectedToggle() == projectionsRadio){
-            loadPredChart();
-            mainPane.setCenter(predictionChart);
-
-
         }
     }
 
@@ -620,16 +489,11 @@ public class MainController {
     }
     @FXML
     public void onSetValuesPressed() {
-        MC = new MoneyCalculations(Double.parseDouble(wageField.getText()),
-            Double.parseDouble(hoursField.getText()),
-
-        bankItems.get(0).getBalance(),
-        bankItems.get(1).getBalance());
         totalInvestmentLabel.setText("Investments: $" + InvestmentItems.getInstance().getTotalInvestments());
         totalNetInvestment.setText("Net Investments: $" + InvestmentItems.getInstance().getNetInvestments());
 
-        rate401 = slider401.getValue()/100.0;
-        rateTax = sliderTax.getValue()/100.0;
+        Double rate401 = slider401.getValue()/100.0;
+        Double rateTax = sliderTax.getValue()/100.0;
         netWorth = determinePayCheck(rate401, rateTax);
         checkingAccountLabel.setText("Checking Account: $" + bankItems.get(0).getBalance());
         savingsAccountLabel.setText("Savings Account: $" + bankItems.get(1).getBalance());
@@ -651,9 +515,5 @@ public class MainController {
         savingsAccountLabel.setText("Savings Account: $" + bankItems.get(1).getBalance());
 
     }
-
-
-
-
-
+}
 }
