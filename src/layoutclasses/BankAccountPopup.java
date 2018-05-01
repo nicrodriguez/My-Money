@@ -26,10 +26,10 @@ public class BankAccountPopup {
         changeInv.setTitle("Update Checking Account Value");
 
         Label checkingLabel = new Label();
-        TextField cBalanceEntry = Utils.createEntryField(checkingLabel, "Checking Account", 16, checkingItem.getBalance().toString());
+        TextField cBalanceEntry = Utils.createChangeEntryField(checkingLabel, "Checking Account", 16, checkingItem.getBalance().toString());
 
         Label savingsLabel = new Label();
-        TextField sBalanceEntry = Utils.createEntryField(savingsLabel, "Savings Account", 16, savingsItem.getBalance().toString());
+        TextField sBalanceEntry = Utils.createChangeEntryField(savingsLabel, "Savings Account", 16, savingsItem.getBalance().toString());
 
 
         Button changeButton = new Button("Update");
