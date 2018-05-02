@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51460778-a0ce-45a0-91af-84beb7862584" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/data/BankInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/BankInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/InvestmentInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/InvestmentInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/PaycheckInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/PaycheckInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layoutclasses/BankAccountPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layoutclasses/BankAccountPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layoutclasses/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layoutclasses/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/maincontroller.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/maincontroller.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="51460778-a0ce-45a0-91af-84beb7862584" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +85,7 @@
       <file leaf-file-name="BillItems.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/classes/BillItems.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-238">
+            <state relative-caret-position="-391">
               <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
             </state>
           </provider>
@@ -143,9 +136,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1358" />
-    <option name="width" value="1390" />
-    <option name="height" value="1756" />
+    <option name="x" value="26" />
+    <option name="y" value="28" />
+    <option name="width" value="2696" />
+    <option name="height" value="1584" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -299,16 +293,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1525200751281</updated>
-      <workItem from="1525200753177" duration="3190000" />
+      <workItem from="1525200753177" duration="3349000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3190000" />
+    <option name="totallyTimeSpent" value="3349000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="679" y="0" width="695" height="878" extended-state="0" />
-    <editor active="true" />
+    <frame x="13" y="14" width="1348" height="792" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -318,10 +311,10 @@
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32974428" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.37290716" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.50549453" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2496124" />
       <window_info anchor="right" id="Database" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -432,7 +425,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/classes/BillItems.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
+        <state relative-caret-position="-391">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
