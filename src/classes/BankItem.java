@@ -23,7 +23,7 @@ public class BankItem {
         return balance;
     }
 
-    public void setAccountName(String accountName) {
+    void setAccountName(String accountName) {
         this.accountName = accountName;
     }
 

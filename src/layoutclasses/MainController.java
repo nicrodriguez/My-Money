@@ -386,16 +386,7 @@ public class MainController {
         summaryPieChart.getData().add(new PieChart.Data("401K Contrib: $" + absValues[3], percentages[3]));
         summaryPieChart.getData().add(new PieChart.Data("Remaining: $"+ absValues[4], percentages[4]));
     }
-//    private void loadPaycheckPiechart(Double[] percentages){
-//        summaryPieChart.getData().clear();
-//        summaryPieChart.setTitle("Paycheck Summary");
-//        summaryPieChart.getData().add(new PieChart.Data("Bills: " + percentages[0] +"%", percentages[0]));
-//        summaryPieChart.getData().add(new PieChart.Data("Investments: " + percentages[1] +"%", percentages[2]));
-//        summaryPieChart.getData().add(new PieChart.Data("Tax: " +percentages[2]+"%", percentages[2]));
-//        summaryPieChart.getData().add(new PieChart.Data("401K Contrib: " + percentages[3] + "%", percentages[3]));
-//        summaryPieChart.getData().add(new PieChart.Data("Remaining Paycheck: "+ percentages[4] + "%", percentages[4]));
-//
-//    }
+
     private void loadDetailedPaycheckPiechart(){
         summaryPieChart.getData().clear();
         summaryPieChart.setTitle("Paycheck Details");
@@ -422,12 +413,7 @@ public class MainController {
         summaryPieChart.getData().add(new PieChart.Data("Investments: $" + absValues[0], percentages[0]));
         summaryPieChart.getData().add(new PieChart.Data("Bank Accounts: $" + absValues[1], percentages[1]));
     }
-//    private void loadWealthPieChartData(Double[] percentages){
-//        summaryPieChart.getData().clear();
-//        summaryPieChart.setTitle("Wealth Summary");
-//        summaryPieChart.getData().add(new PieChart.Data("Investments: " + percentages[0] +"%", percentages[0]));
-//        summaryPieChart.getData().add(new PieChart.Data("Bank Accounts: " + percentages[1] + "%", percentages[1]));
-//    }
+
     private void loadDetailedWealthPieChartData(){
         summaryPieChart.getData().clear();
         summaryPieChart.setTitle("Wealth Details");
@@ -443,49 +429,6 @@ public class MainController {
 
     }
 
-    // Predictions chart data
-    private List<Double> calculateBankPrediction(){
-
-        Double val = BankItems.getInstance().getAccountsSum();
-        List<Double> monthlyVals = new ArrayList<>();
-        monthlyVals.add(val);
-        for(int i = 0; i < 11; i++){
-            val += (MC.getMonthlyPayCheckNet()) ;
-            monthlyVals.add(val);
-        }
-
-        return monthlyVals;
-    }
-    private List<Double> calculateInvestmentPredictions(InvestmentItem investmentItem){
-        Double investmentVal = investmentItem.getNetSum();
-        List<Double> monthlyVals = new ArrayList<>();
-        monthlyVals.add((investmentVal + investmentVal*0.05));
-        for(int i = 0; i < 11; i++){
-            if(investmentItem.getName().equals("401k")){
-                investmentVal += MC.getMonthlyPayCheck()*rate401*2;
-                monthlyVals.add(investmentVal);
-            }else {
-                investmentVal += investmentItem.getAmountPerMonth();
-                monthlyVals.add((investmentVal + investmentVal * 0.05));
-            }
-        }
-        return monthlyVals;
-    }
-    private List<Double> calculateNetWorthPredictions(){
-        Double netWorthVal = netWorth;
-        Double investments = 0.0;
-        List<InvestmentItem> investmentItems = InvestmentItems.getInstance().getInvestmentItems();
-        List<Double> monthlyVals = new ArrayList<>();
-        for(InvestmentItem investmentItem : investmentItems){
-            investments += investmentItem.getAmountPerMonth();
-        }
-        monthlyVals.add(netWorthVal);
-        for(int i = 0; i < 11; i++){
-            netWorthVal += ((investments + investments*0.05) + MC.getMonthlyPayCheckNet() + MC.getMonthlyPayCheck()*rate401*2);
-            monthlyVals.add(netWorthVal);
-        }
-        return monthlyVals;
-    }
 
     private void loadPredChart(){
         MC = new MoneyCalculations(Double.parseDouble(wageField.getText()),
@@ -502,8 +445,8 @@ public class MainController {
         predictionChart = new LineChart<>(xAxisPred, yAxisPred);
         predictionChart.setTitle("Projections");
         List<String> months = timeSpan.getNext12Months();
-        List<Double> bankAccountBalance = calculateBankPrediction();
-        List<Double> netWorthPred = calculateNetWorthPredictions();
+        List<Double> bankAccountBalance = MC.calculateBankPrediction();
+        List<Double> netWorthPred = MC.calculateNetWorthPredictions(netWorth);
 
 
 
@@ -516,15 +459,16 @@ public class MainController {
         List<InvestmentItem> investmentItems = InvestmentItems.getInstance().getInvestmentItems();
 
         List<XYChart.Series<String, Number>> investmentSeries = new ArrayList<>();
+
+
         for(int i = 0; i < investmentItems.size(); i++){
-            investments.add(calculateInvestmentPredictions(investmentItems.get(i)));
+            investments.add(MC.calculateInvestmentPredictions(investmentItems.get(i)));
             investmentSeries.add(new XYChart.Series<>());
             investmentSeries.get(i).setName(investmentItems.get(i).getName());
             for(int j = 0; j < 12; j++){
                 investmentSeries.get(i).getData().add(new XYChart.Data<>(months.get(j), investments.get(i).get(j)));
             }
         }
-
 
         for(int i = 0; i < 12; i++){
             bankSeries.getData().add(new XYChart.Data<>(months.get(i), bankAccountBalance.get(i)));

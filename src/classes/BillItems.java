@@ -25,9 +25,9 @@ public class BillItems {
         for(String bill : bills){
             String[] billInfo = bill.split(",");
             billItems.add(new BillItem(billInfo[0],
-                    Double.parseDouble(billInfo[1]),
-                    Double.parseDouble(billInfo[2]),
-                    Double.parseDouble(billInfo[3])));
+                    Double.valueOf(df.format(Double.parseDouble(billInfo[1]))),
+                    Double.valueOf(df.format(Double.parseDouble(billInfo[2]))),
+                    Double.valueOf(df.format(Double.parseDouble(billInfo[3])))));
         }
 
     }

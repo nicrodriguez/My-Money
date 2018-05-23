@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.text.DecimalFormat;
 
-public class ChangeInvestmentPopup {
+class ChangeInvestmentPopup {
 
 //    private static TextField createEntryField(Label label, String text, int fontSize, String prompt){
 //        label.setText(text);
@@ -29,7 +29,7 @@ public class ChangeInvestmentPopup {
 //        return Entry;
 //    }
 
-    public static void display(int index, InvestmentItem investmentItem){
+    static void display(int index, InvestmentItem investmentItem){
         Stage changeInv = new Stage();
 
         changeInv.initModality(Modality.APPLICATION_MODAL);
