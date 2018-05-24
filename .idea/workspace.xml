@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51460778-a0ce-45a0-91af-84beb7862584" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/My-Money/data/BankInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/My-Money/data/BankInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/My-Money/data/InvestmentInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/My-Money/data/InvestmentInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/My-Money/data/PaycheckInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/My-Money/data/PaycheckInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/My-Money/layoutclasses/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/My-Money/layoutclasses/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/BankItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/BankItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/BillItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/BillItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MoneyCalculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MoneyCalculations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/BankInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/BankInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/InvestmentInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/InvestmentInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/PaycheckInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/PaycheckInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layoutclasses/ChangeInvestmentPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layoutclasses/ChangeInvestmentPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layoutclasses/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layoutclasses/MainController.java" afterDir="false" />
-    </list>
+    <list default="true" id="51460778-a0ce-45a0-91af-84beb7862584" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -150,7 +136,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="26" />
     <option name="y" value="28" />
     <option name="width" value="2696" />
@@ -309,12 +295,12 @@
       <option name="presentableId" value="Default" />
       <updated>1525200751281</updated>
       <workItem from="1525200753177" duration="3349000" />
-      <workItem from="1527084804207" duration="1344000" />
+      <workItem from="1527084804207" duration="1452000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4693000" />
+    <option name="totallyTimeSpent" value="4801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="13" y="14" width="1348" height="792" extended-state="0" />
@@ -328,7 +314,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.03196347" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.03196347" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25348836" />
