@@ -6,3 +6,4 @@ Amazon Prime,4.42,0.0,0.0
 Utilities,0.0,0.0,0.0
 Gas,0.0,0.0,0.0
 Misc,100.0,0.0,0.0
+Student Loans,200.0,40000.0,0.0

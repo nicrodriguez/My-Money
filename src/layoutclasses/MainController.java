@@ -107,7 +107,8 @@ public class MainController {
     private Button detailsButton;
 
     //Wealth Projection
-    private LineChart<String, Number> predictionChart;
+    private LineChart<String, Number> wealthPredictionChart;
+    private LineChart<String, Number> billPredictionChart;
 
     /*********** Left Pane ***********/
     @FXML
@@ -117,7 +118,9 @@ public class MainController {
     @FXML
     private RadioButton billRadio;
     @FXML
-    private RadioButton projectionsRadio;
+    private RadioButton wealthProjectionsRadio;
+    @FXML
+    private RadioButton billProjectionsRadio;
 
     private DecimalFormat df;
     private Double netWorth;
@@ -442,8 +445,8 @@ public class MainController {
         CategoryAxis xAxisPred = new CategoryAxis();
         NumberAxis yAxisPred = new NumberAxis();
         yAxisPred.setLabel("Bank Balance ($)");
-        predictionChart = new LineChart<>(xAxisPred, yAxisPred);
-        predictionChart.setTitle("Projections");
+        wealthPredictionChart = new LineChart<>(xAxisPred, yAxisPred);
+        wealthPredictionChart.setTitle("Projections");
         List<String> months = timeSpan.getNext12Months();
         List<Double> bankAccountBalance = MC.calculateBankPrediction();
         List<Double> netWorthPred = MC.calculateNetWorthPredictions(netWorth);
@@ -474,10 +477,19 @@ public class MainController {
             bankSeries.getData().add(new XYChart.Data<>(months.get(i), bankAccountBalance.get(i)));
             netWorthSeries.getData().add(new XYChart.Data<>(months.get(i), netWorthPred.get(i)));
         }
-        predictionChart.getData().add(bankSeries);
-        predictionChart.getData().add(netWorthSeries);
+        wealthPredictionChart.getData().add(bankSeries);
+        wealthPredictionChart.getData().add(netWorthSeries);
         for(XYChart.Series<String, Number> invSeries: investmentSeries){
-            predictionChart.getData().add(invSeries);
+            wealthPredictionChart.getData().add(invSeries);
+        }
+    }
+
+    private void loadBillPredChart() {
+
+        List<List<Double>> billValueList = new ArrayList<>();
+        List<BillItem> bills = BillItems.getInstance().getBillItems();
+        for(int i = 0; i < bills.size(); i++) {
+            billValueList.add(MC.calculateBillPredictions(bills.get(i)));
         }
     }
 
@@ -489,9 +501,9 @@ public class MainController {
         }else if(chartToggle.getSelectedToggle() == billRadio){
             mainPane.setCenter(pieChartVBox);
             loadPaycheckChartData();
-        }else if(chartToggle.getSelectedToggle() == projectionsRadio){
+        }else if(chartToggle.getSelectedToggle() == wealthProjectionsRadio){
             loadPredChart();
-            mainPane.setCenter(predictionChart);
+            mainPane.setCenter(wealthPredictionChart);
 
 
         }
@@ -577,7 +589,7 @@ public class MainController {
         netWorth = determinePayCheck(rate401, rateTax);
         checkingAccountLabel.setText("Checking Account: $" + bankItems.get(0).getBalance());
         savingsAccountLabel.setText("Savings Account: $" + bankItems.get(1).getBalance());
-        netWorthLabel.setText("Net Worth: $" + netWorth);
+        netWorthLabel.setText("Net Worth: $" + Double.valueOf(df.format(netWorth)));
         List<String> paycheckData  = new ArrayList<>();
         updatePaycheckFile(paycheckData);
 

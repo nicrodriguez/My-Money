@@ -106,4 +106,14 @@ public class MoneyCalculations {
         }
         return monthlyVals;
     }
+    public List<Double> calculateBillPredictions(BillItem billItem){
+        Double billVal = billItem.getAmountRemaining();
+        List<Double> monthlyVals = new ArrayList<>();
+        monthlyVals.add(billVal);
+        for(int i = 0; i < 11; i++) {
+            billVal -= billItem.getAmountPerMonth();
+            monthlyVals.add(billVal);
+        }
+        return monthlyVals;
+    }
 }

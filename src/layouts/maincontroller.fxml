@@ -28,14 +28,6 @@
 
 <BorderPane fx:id="mainPane" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="layoutclasses.MainController">
     <top>
-        <Label text="My Money" underline="true" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets top="20" />
-            </padding>
-            <font>
-                <Font size="40" />
-            </font>
-        </Label>
     </top>
     <right>
         <VBox>
@@ -93,7 +85,7 @@
                         </VBox>
                     <!--</ScrollPane>-->
                 </TitledPane>
-                <TitledPane fx:id="BI" style="-fx-border-color: #D43F3F;" text="Billing Info">
+                <TitledPane fx:id="BI" style="-fx-border-color: #D43F3F" text="Billing Info">
                     <VBox spacing="10" style="-fx-background-color: #f2c5c5;">
                         <ListView fx:id="billListView" style="-fx-border-color: #D43F3F;">
                             <effect>
@@ -229,7 +221,12 @@
                 </Label>
             </VBox>
 
-            <Button fx:id="setValuesButton" onAction="#onSetValuesPressed" text="Update Values" BorderPane.alignment="CENTER">
+            <Button
+                    fx:id="setValuesButton"
+                    onAction="#onSetValuesPressed"
+                    text="Update Values"
+                    BorderPane.alignment="CENTER"
+            >
                 <font>
                     <Font size="16" />
                 </font>
@@ -251,7 +248,8 @@
                 </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="billRadio" text="Paycheck Summary" toggleGroup="$chartToggle" />
-            <RadioButton fx:id="projectionsRadio" text="Projections" toggleGroup="$chartToggle"/>
+            <RadioButton fx:id="wealthProjectionsRadio" text="Wealth Projections" toggleGroup="$chartToggle"/>
+            <RadioButton fx:id="billProjectionsRadio" text="Bill Projections" toggleGroup="$chartToggle" />
         </VBox>
     </left>
     <center>

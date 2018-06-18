@@ -1,3 +1,3 @@
-General Investing,200.0,460.0,455.56
-First Car,200.0,50.0,50.4
+General Investing,200.0,460.0,460.98
+First Car,150.0,100.0,100.91
 401k,0.0,0.0,0.0
